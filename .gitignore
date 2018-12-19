@@ -1,0 +1,4 @@
+nbproject/*
+test-result/*
+tmp/*
+conf/application.conf
