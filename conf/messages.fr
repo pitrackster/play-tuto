@@ -1,0 +1,15 @@
+title=Titre
+content=Contenu
+postedAt=Créé le
+author=Auteur
+post=Post concerné
+tags=Tags
+name=Nom
+email=Email
+password=Password
+fullname=Nom complet
+isAdmin=Administrateur
+
+secure.username=Votre email:
+secure.password=Votre mot de passe:
+secure.signin=Allons z'y

@@ -8,7 +8,11 @@ public class BasicTest extends UnitTest {
 
     @Before
     public void setup() {
-        Fixtures.deleteDatabase();
+    	// since we are deleting all table from db 
+    	// ERROR ~ could not read a hi value - you need to populate the table: hibernate_sequence...
+        //Fixtures.deleteDatabase();
+        Fixtures.deleteAllModels();
+        //Fixtures.loadModels("initial-data.yml");
     }
 
     @Test
@@ -122,6 +126,32 @@ public class BasicTest extends UnitTest {
         assertEquals(1, User.count());
         assertEquals(0, Post.count());
         assertEquals(0, Comment.count());
+    }
+    
+    @Test
+    public void testTags() {
+        // Create a new user and save it
+        User bob = new User("bob@gmail.com", "secret", "Bob").save();
+     
+        // Create a new post
+        Post bobPost = new Post(bob, "My first post", "Hello world").save();
+        Post anotherBobPost = new Post(bob, "Hop", "Hello world").save();
+     
+        // Well
+        assertEquals(0, Post.findTaggedWith("Red").size());
+     
+        // Tag it now
+        bobPost.tagItWith("Red").tagItWith("Blue").save();
+        anotherBobPost.tagItWith("Red").tagItWith("Green").save();
+     
+        // Check
+        assertEquals(2, Post.findTaggedWith("Red").size());
+        assertEquals(1, Post.findTaggedWith("Blue").size());
+        assertEquals(1, Post.findTaggedWith("Green").size());
+        assertEquals(1, Post.findTaggedWith("Red", "Blue").size());
+        assertEquals(1, Post.findTaggedWith("Red", "Green").size());
+        assertEquals(0, Post.findTaggedWith("Red", "Green", "Blue").size());
+        assertEquals(0, Post.findTaggedWith("Green", "Blue").size());
     }
 
     @Test

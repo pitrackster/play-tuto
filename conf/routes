@@ -5,6 +5,15 @@
 # Home page
 GET     /                                       Application.index
 
+# Show post
+GET     /posts/{<[0-9]+>id}                     Application.show
+GET     /posts/{tag}                            Application.listTagged
+
+# Add post comment
+POST    /posts/{postId}/comments                Application.postComment
+
+GET     /captcha                                Application.captcha
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
@@ -12,4 +21,15 @@ GET     /favicon.ico                            404
 GET     /public/                                staticDir:public
 
 # Catch all
-*       /{controller}/{action}                  {controller}.{action}
+# *       /{controller}/{action}                  {controller}.{action}
+
+# Import CRUD routes
+GET    	/admin/?                                Admin.index
+GET     /admin/myPosts/{id}                 	Admin.form
+POST    /admin/myPosts/{id}                 	Admin.save
+GET     /admin/new                          	Admin.form
+POST    /admin/new                          	Admin.save
+*      	/admin              					module:crud
+
+# Import Secure routes
+*      /                                       	module:secure

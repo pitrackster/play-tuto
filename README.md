@@ -21,3 +21,6 @@ https://www.playframework.com/documentation/1.5.x/guide2
 ```
 
 `<source-level>1.8</source-level>` n'est pas valide pour Netbeans 8.2, supprimer cette balise permet d'importer le projet dans Netbeans
+
+
+- moteur de template groovy

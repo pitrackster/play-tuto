@@ -1,0 +1,31 @@
+#{extends 'admin.html' /}
+#{set 'stylesheets'}
+    <link rel="stylesheet" type="text/css" media="screen" 
+        href="@{'/public/stylesheets/crud.css'}" />
+        <link rel="stylesheet" type="text/css" media="screen" 
+        href="@{'/public/stylesheets/tags.css'}" />
+#{/set}
+
+#{set 'scripts'}
+	<script src="@{'/public/javascripts/admin.js'}"> </script>
+#{/set}
+ 
+<div id="crud">
+ 
+    #{if flash.success}
+    	<div class="crudFlash flashSuccess">
+    		${flash.success}
+    	</div>
+    #{/if}
+    #{if flash.error || error}
+    	<div class="crudFlash flashError">
+    		${error ?: flash.error}
+    	</div>
+    #{/if}
+ 
+    <div id="crudContent">
+    	#{doLayout /}
+    </div>
+ 
+</div>
+

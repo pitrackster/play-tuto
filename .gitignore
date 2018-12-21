@@ -2,3 +2,10 @@ nbproject/*
 test-result/*
 tmp/*
 conf/application.conf
+eclipse/*
+.project
+.classpath
+.settings/
+docviewer/*
+server.pid
+logs/*
