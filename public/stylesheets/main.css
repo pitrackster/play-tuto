@@ -2,14 +2,8 @@
 
 html, body {
     background: #364B66 !important;
-    font-family: Helvetica, Arial, Sans !important;
 }
 
-body {
-    width: 900px;
-    padding: 0 30px;
-    margin: auto;
-}
 
 /** Blog header **/
 

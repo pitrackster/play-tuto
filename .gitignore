@@ -9,3 +9,5 @@ eclipse/*
 docviewer/*
 server.pid
 logs/*
+node_modules/*
+public/build/*

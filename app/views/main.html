@@ -3,19 +3,23 @@
     <head>
         <title>#{get 'title' /}</title>		
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <link rel="stylesheet" type="text/css" media="screen" 
-              href="@{'/public/stylesheets/main.css'}" />
-        <link rel="shortcut icon" type="image/png" 
-              href="@{'/public/images/favicon.png'}" />
-              <!--  
-        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}"></script>
-        -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-tools/1.2.7/jquery.tools.min.js"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}" />
+        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/build/app.css'}" />
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
+
+        <script src="@{'/public/build/main.js'}"></script>
+   
+        
     </head>
     <body>
-
-        <div id="header">
+		<div class="container">
+		<div title="alert" data-toggle="tooltip" data-placement="right" class="alert" style="height:250px;width:100%;background-color:red;display:none;">
+			<i class="fas fa-trash fa-fw"></i>So Trash!
+			<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="Tooltip on top">
+  Tooltip on top
+</button>
+		</div>
+		<div id="header">
             <div id="logo">
                 yabe. 
             </div>
@@ -40,6 +44,8 @@
             <a href="https://www.playframework.com">Play framework</a>
             as a tutorial application.
         </p>
+		</div>
+        
         
 
     </body>
