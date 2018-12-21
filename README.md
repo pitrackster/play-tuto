@@ -60,6 +60,27 @@ Post(jeffPost):
                     A Play
  ```
 
+
+### install
+
+- `cd ~/projects`
+- `git clone thirepository`
+- `play eclispsify`
+
+puis dans eclipse :
+
+- File -> import -> existing project into workspace
+
+\o/
+
+- ensuite dans le projet
+- cp conf/application.model.conf conf/application.conf
+- play dependencies
+- npm install
+- npm run build
+  
+
+
 ### dependencies
 
 - lancer la commande `play dependencies` update le fichier conf/dependencies.conf
