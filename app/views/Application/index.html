@@ -1,4 +1,8 @@
 #{extends 'main.html' /}
+
+#{set 'pagescripts'}
+<script src="@{'/public/build/home.bundle.js'}"></script>
+#{/set}
 #{set title:'Home' /}
  
 #{if frontPost}
@@ -7,7 +11,7 @@
     
     #{if olderPosts.size()}
     
-        <div class="older-posts">
+        <div class="older-posts" data-toggle="tooltip" title="older posts">
             <h3>Older posts <span class="from">from this blog</span></h3>
         
             #{list items:olderPosts, as:'oldPost'}

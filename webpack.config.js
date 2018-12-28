@@ -1,5 +1,5 @@
 /* global require process __dirname module */
-
+const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 
@@ -7,9 +7,12 @@ const env = process.env.NODE_ENV
 
 module.exports = {
   mode: env || 'development',
-  entry: './src/index.js',
+  entry: {
+	  common: ['./src/common.js', './src/common.scss'],
+	  home: './src/home.js'
+  },
   output: {
-    filename: 'main.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'public/build')
   },
   module: {
@@ -73,8 +76,12 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'app.css',
+      filename: '[name].bundle.css',
       chunkFilename: '[id].css'
+    }),
+    new webpack.ProvidePlugin({
+    	$:'jquery',
+    	jQuery: 'jquery'
     })
   ]
 }

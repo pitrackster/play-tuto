@@ -3,17 +3,23 @@
     <head>
         <title>#{get 'title' /}</title>		
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}" />
-        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/build/app.css'}" />
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
 
-        <script src="@{'/public/build/main.js'}"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}" />
+        <!-- build with webpack -->
+        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/build/common.bundle.css'}" />    
+        #{get 'pagestyles' /}
+        
+		<!-- build with webpack -->
+        <script src="@{'/public/build/common.bundle.js'}"></script>
+		#{get 'pagescripts' /}
+		
    
         
     </head>
     <body>
 		<div class="container">
-		<div title="alert" data-toggle="tooltip" data-placement="right" class="alert" style="height:250px;width:100%;background-color:red;display:none;">
+		<div title="alert" data-toggle="tooltip" data-placement="right" class="alert" style="height:250px;width:100%;display:none;">
 			<i class="fas fa-trash fa-fw"></i>So Trash!
 			<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="Tooltip on top">
   Tooltip on top
