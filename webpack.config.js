@@ -1,87 +1,89 @@
 /* global require process __dirname module */
 const webpack = require('webpack')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+require('dotenv').config()
 const env = process.env.NODE_ENV
+
 
 module.exports = {
   mode: env || 'development',
+  performance: {
+    hints: env === 'production' ? 'warning' : false
+  },
+  devtool: 'eval-source-map',
   entry: {
-	  common: ['./src/common.js', './src/common.scss'],
-	  home: './src/home.js'
+    common: ['./src/common.js', './src/common.scss'],
+    home: './src/home.js'
   },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'public/build')
   },
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
+    rules: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader'
+      }
+    },
+    {
+      test: /\.(sa|sc)ss$/,
+      use: [env !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+    },
+    {
+      test: /\.(jpe?g|png|gif)$/,
+      loader: 'file-loader',
+      options: {
+        outputPath: 'assets/',
       },
-      {
-        test: /\.sc|ass$/,
-        use: [
-          { loader: MiniCssExtractPlugin.loader },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true,
-              config: {
-                ctx: {
-                  cssnano: {},
-                  autoprefixer: {}
-                }
-              }
-            }
-          },
-          {
-            loader: 'resolve-url-loader' // améliore la résolution des chemins relatifs
-            // (utile par exemple quand une librairie tierce fait référence à des images ou des fonts situés dans son propre dossier)
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true // il est indispensable d'activer les sourcemaps pour que postcss fonctionne correctement
-            }
-          }
-        ]
+    },
+    {
+      test: /\.(eot|svg|ttf|woff2?|otf)$/,
+      loader: 'file-loader',
+      options: {
+        outputPath: 'assets/',
       },
-      {
-        test: /\.(eot|ttf|woff|woff2)$/,
-        loader: 'file-loader',
-        options: {
-          name: 'fonts/[name].[hash].[ext]'
-        }
-      },
-      {
-        test: /\.(gif|png|jpe?g|svg)$/i,
-        use: [
-          'file-loader',
-          { loader: 'image-webpack-loader' },
-        ],
-      },
-    ]
+    }]
   },
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].bundle.css',
-      chunkFilename: '[id].css'
+      chunkFilename: '[id].css',
+      cssProcessorOptions: {
+        safe: true,
+        discardComments: {
+          removeAll: true,
+        },
+      },
     }),
     new webpack.ProvidePlugin({
-    	$:'jquery',
-    	jQuery: 'jquery'
-    })
-  ]
+      $: 'jquery',
+      jQuery: 'jquery'
+    }),
+    new BundleAnalyzerPlugin(),
+    new CleanWebpackPlugin('public/build', { verbose: true }),
+  ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        sourceMap: true,
+        terserOptions: {
+          output: {
+            comments: false,
+          },
+        },
+      }),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
+  },
 }

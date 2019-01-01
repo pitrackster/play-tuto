@@ -1,58 +1,53 @@
 <!DOCTYPE html >
 <html>
-    <head>
-        <title>#{get 'title' /}</title>		
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
+  <head>
+    <title>#{get 'title' /}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}" />
+    <!-- build with webpack -->
+    <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/build/common.bundle.css'}" />
+    #{get 'pagestyles' /}
 
-        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}" />
-        <!-- build with webpack -->
-        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/build/common.bundle.css'}" />    
-        #{get 'pagestyles' /}
-        
-		<!-- build with webpack -->
-        <script src="@{'/public/build/common.bundle.js'}"></script>
-		#{get 'pagescripts' /}
-		
-   
-        
-    </head>
-    <body>
-		<div class="container">
-		<div title="alert" data-toggle="tooltip" data-placement="right" class="alert" style="height:250px;width:100%;display:none;">
-			<i class="fas fa-trash fa-fw"></i>So Trash!
-			<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="Tooltip on top">
-  Tooltip on top
-</button>
-		</div>
-		<div id="header">
-            <div id="logo">
-                yabe. 
-            </div>
-            <ul id="tools">
-                <li>
-                    <a href="@{Admin.index()}">Log in to write something</a>
-                </li>
-            </ul>
-            <div id="title">
-                <span class="about">About this blog</span>
-                <h1><a href="@{Application.index()}">${blogTitle}</a></h1>
-                <h2>${blogBaseline}</h2>
-            </div>
+    <!-- build with webpack -->
+    <script src="@{'/public/build/vendors~common.bundle.js'}"></script>
+    <script src="@{'/public/build/common.bundle.js'}"></script>
+    #{get 'pagescripts' /}
+  </head>
+
+  <body>
+    <div class="container">
+      <div title="alert" data-toggle="tooltip" data-placement="right" class="alert" style="height:250px;width:100%;display:none;">
+        <i class="fas fa-trash fa-fw"></i>So Trash!
+        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="Tooltip on top">
+          Tooltip on top
+        </button>
+      </div>
+      <div id="header">
+        <div id="logo">
+          yabe.
         </div>
-
-        <div id="main">
-            #{doLayout /} 
+        <ul id="tools">
+          <li>
+            <a href="@{Admin.index()}">Log in to write something</a>
+          </li>
+        </ul>
+        <div id="title">
+          <span class="about">About this blog</span>
+          <h1><a href="@{Application.index()}">${blogTitle}</a></h1>
+          <h2>${blogBaseline}</h2>
         </div>
+      </div>
 
-        <p id="footer">
-            Yabe is a (not that) powerful blog engine built with the 
-            <a href="https://www.playframework.com">Play framework</a>
-            as a tutorial application.
-        </p>
-		</div>
-        
-        
+      <div id="main">
+        #{doLayout /}
+      </div>
 
-    </body>
+      <p id="footer">
+        Yabe is a (not that) powerful blog engine built with the
+        <a href="https://www.playframework.com">Play framework</a>
+        as a tutorial application.
+      </p>
+    </div>
+  </body>
 </html>
